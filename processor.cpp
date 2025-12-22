@@ -117,7 +117,10 @@ bool do_user_command(int command, processor_t* processor)
     int cell_number = -1;
 
     //printf("command code = %d", command);
+    //stack_dump(&processor->stk);
+    //printf("command = %d\n", command);
 
+    //getchar();
     switch(command)
     {
         case HLT:
@@ -212,7 +215,6 @@ bool do_user_command(int command, processor_t* processor)
             (processor->instruction_pointer)++;
 
             cell_number = processor->regs[processor->programm[processor->instruction_pointer]];
-            //printf("%d\n", cell_number);//cell_number > 100 ?
 
             processor->RAM[cell_number] = value;
 
@@ -233,7 +235,7 @@ bool do_user_command(int command, processor_t* processor)
             (processor->instruction_pointer)++;
             cell_number = processor->programm[processor->instruction_pointer];
 
-            stack_push(&processor->stk, processor->RAM[cell_number]);
+            stack_push(&processor->stk, processor->RAM[processor->regs[cell_number]]);
 
             return 0;
         case JB:
@@ -241,7 +243,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1>elem_2)
+            if (elem_1 > elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;
@@ -250,7 +252,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1>=elem_2)
+            if (elem_1 >= elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;
@@ -259,7 +261,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1<elem_2)
+            if (elem_1 < elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;
@@ -268,7 +270,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1<=elem_2)
+            if (elem_1 <= elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;
@@ -277,7 +279,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1==elem_2)
+            if (elem_1 == elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;
@@ -286,7 +288,7 @@ bool do_user_command(int command, processor_t* processor)
             stack_pop(&processor->stk, &elem_2);
 
             (processor->instruction_pointer)++;
-            if (elem_1!=elem_2)
+            if (elem_1 != elem_2)
                 processor->instruction_pointer = processor->programm[processor->instruction_pointer] - 1;
 
             return 0;

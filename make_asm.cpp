@@ -67,7 +67,7 @@ tree_errors node_assemblating(node_t* node, tree_t* tree, FILE* asm_address, int
             node_assemblating(node->right, tree, asm_address, label_number);
             node_assemblating(node->left, tree, asm_address, label_number);
             fprintf(asm_address, "PUSH 0\n"
-                                 "JE :%d\n", label_number_now + 1);
+                                 "JNE :%d\n", label_number_now + 1);
             fprintf(asm_address, ":%d\n", label_number_now);
             break;
         case END_OF_PROGRAMM:
