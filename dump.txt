@@ -25,7 +25,7 @@ digraph{
 	ZRR -> ZRRR
 	ZRRR[shape = record, style="filled",fillcolor="lightgreen", label="{OP_END}"];
 	ZRRR -> ZRRRL
-	ZRRRL[shape = record, style="filled",fillcolor="lightgreen", label="{PRINT}"];
+	ZRRRL[shape = record, style="filled",fillcolor="lightgreen", label="{INPUT}"];
 	ZRRRL -> ZRRRLL
 	ZRRRLL[shape = record, style="filled",fillcolor="lightblue", label="{n}"];
 	ZRRR -> ZRRRR
@@ -62,6 +62,18 @@ digraph{
 	ZRRRRLRRLRL[shape = record, style="filled",fillcolor="lightblue", label="{i}"];
 	ZRRRRLRRLR -> ZRRRRLRRLRR
 	ZRRRRLRRLRR[shape = record, style="filled",fillcolor="yellow", label="{1}"];
+	ZRRRRLRR -> ZRRRRLRRR
+	ZRRRRLRRR[shape = record, style="filled",fillcolor="lightgreen", label="{OP_END}"];
+	ZRRRRLRRR -> ZRRRRLRRRL
+	ZRRRRLRRRL[shape = record, style="filled",fillcolor="lightgreen", label="{PRINT}"];
+	ZRRRRLRRRL -> ZRRRRLRRRLL
+	ZRRRRLRRRLL[shape = record, style="filled",fillcolor="lightblue", label="{fac}"];
 	ZRRRR -> ZRRRRR
-	ZRRRRR[shape = record, style="filled",fillcolor="lightgreen", label="{END_OF_PROGRAMM}"];
+	ZRRRRR[shape = record, style="filled",fillcolor="lightgreen", label="{OP_END}"];
+	ZRRRRR -> ZRRRRRL
+	ZRRRRRL[shape = record, style="filled",fillcolor="lightgreen", label="{PRINT}"];
+	ZRRRRRL -> ZRRRRRLL
+	ZRRRRRLL[shape = record, style="filled",fillcolor="lightblue", label="{fac}"];
+	ZRRRRR -> ZRRRRRR
+	ZRRRRRR[shape = record, style="filled",fillcolor="lightgreen", label="{END_OF_PROGRAMM}"];
 }

@@ -63,9 +63,12 @@ enum tree_errors{
     TYPE_ERROR = 9,
     UNKNOWN_OPERATOR_ERROR = 10,
     DUMP_ERROR = 11,
+    TREE_READING_ERROR = 12,
+    ASM_MAKING_ERROR = 13,
 };
 
 tree_errors tree_init(tree_t** tree);
+void infix_tree_destroy(tree_t* tree);
 void tree_destroy(tree_t* tree);
 
 node_t* node_init(tree_elem_t value, type_t type, node_t* left, node_t* right);
@@ -77,7 +80,8 @@ node_t* infix_read(char* file_name, tree_t* tree);
 tree_errors tree_dump(tree_t* tree);
 tree_errors node_output(node_t* node, tree_t* tree, FILE* output_address);
 
-bool check_file_founded(int argc, int number_of_files);
+tree_errors tree_input(tree_t* tree, char* file_name);
+tree_errors node_assemblating(node_t* node, tree_t* tree, FILE* asm_address, int* label_number);
 
 #endif //LANGUAGE_H
 

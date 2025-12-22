@@ -7,6 +7,8 @@
 #include "file_using.h"
 #include "language.h"
 
+static bool check_file_founded(int argc, int number_of_files);
+
 const int NUMBER_OF_FILES = 2;
 
 int main(int argc, char* argv[])
@@ -17,12 +19,13 @@ int main(int argc, char* argv[])
     if (check_file_founded(argc, NUMBER_OF_FILES))
         return FILES_NOT_FOUNDED_ERROR;
 
-    tree_init(&tree);
+    if (tree_init(&tree))
+        return ALLOCATION_ERROR;
 
     tree->root = infix_read(argv[1], tree);
     tree_dump(tree);
 
-    if (check_file_opening(argv[2], &output_address, "r+"))
+    if (check_file_opening(argv[2], &output_address, "w+"))
         return FILE_OPENING_ERROR;
 
     node_output(tree->root, tree, output_address);
@@ -30,7 +33,7 @@ int main(int argc, char* argv[])
     if (check_file_closing(output_address))
         printf("Error while closing file!");
 
-    tree_destroy(tree);
+    infix_tree_destroy(tree);
 }
 
 bool check_file_founded(int argc, int number_of_files)

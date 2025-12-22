@@ -56,7 +56,7 @@ void node_destroy(node_t* node)
     return;
 }
 
-void tree_destroy(tree_t* tree)
+void infix_tree_destroy(tree_t* tree)
 {
     assert(tree);
 
@@ -67,6 +67,20 @@ void tree_destroy(tree_t* tree)
         free(tree->variable_list[i].var_name);
 
     free(tree->node_list_begin);
+    free(tree->variable_list);
+    free(tree);
+}
+
+void tree_destroy(tree_t* tree)
+{
+    assert(tree);
+
+    if (tree->root != NULL)
+        node_destroy(tree->root);
+
+    for (int i = 0; i < tree->number_of_variables; i++)
+        free(tree->variable_list[i].var_name);
+
     free(tree->variable_list);
     free(tree);
 }

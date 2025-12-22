@@ -44,6 +44,18 @@ static node_t* get_v(node_t*** node_list, tree_t* tree);
 static node_t* make_new_var(char* str, tree_t* tree);
 
 const int START_STR_LEN = 10;
+const char WHILE_COMMAND[] = "До тех пор, пока, волею Омниссии";
+const char COMPLEX_OPERATOR_OPEN_COMMAND[] = "Именем Омниссии, исполни";
+const char COMPLEX_OPERATOR_CLOSE_COMMAND[] = "Вознеси хвалу Омниссии";
+const char IF_COMMAND[] = "Ежели, хвала Омниссиии";
+const char END_OF_PROGRAMM_COMMAND[] = "Поблагодари святой когитатор за успешное выполнение";
+const char ASSIGNMENT_COMMAND[] = "присвой значение этой частице Омниссии";
+const char ADD_COMMAND[] = "сложи сии священные числа";
+const char SUB_COMMAND[] = "вычти сии священные числа";
+const char MUL_COMMAND[] = "умножь сии священные числа";
+const char DIV_COMMAND[] = "раздели сии священные числа";
+const char PRINT_COMMAND[] = "Поделись с адептом священным значением выражения";
+const char INPUT_COMMAND[] = "Потребуй у адепта Бога-Машины значение числа";
 
 node_t* infix_read(char* file_name, tree_t* tree)
 {
@@ -82,14 +94,15 @@ node_t* infix_read(char* file_name, tree_t* tree)
 
     node_list = lexic_analiz(&buffer, tree);
     tree->node_list_begin = node_list;
+
     if (node_list == NULL)
         return NULL;
 
-    printf("lexic analiz is finished\n");
+    printf("Lexic analiz is finished\n");
 
     value = get_g(&node_list, tree);
 
-    //make_parents(value, NULL);
+    printf("Syntax analiz is finished\n");
 
     free(buffer_begin);
 
@@ -121,65 +134,65 @@ node_t** lexic_analiz(char** buffer, tree_t* tree)
             node_list = (node_t**) realloc(node_list, node_list_len*sizeof(node_t*));
         }
 
-        if (strncmp(*buffer, "Именем Омниссии, исполни", strlen("Именем Омниссии, исполни")) == 0)
+        if (strncmp(*buffer, COMPLEX_OPERATOR_OPEN_COMMAND, strlen(COMPLEX_OPERATOR_OPEN_COMMAND)) == 0)
         {
             node_list[node_number] = COPMLEX_OPERATOR_OPEN_();
-            *buffer += strlen("Именем Омниссии, исполни");
+            *buffer += strlen(COMPLEX_OPERATOR_OPEN_COMMAND);
         }
-        else if (strncmp(*buffer, "Вознеси хвалу Омниссии", strlen("Вознеси хвалу Омниссии")) == 0)
+        else if (strncmp(*buffer, COMPLEX_OPERATOR_CLOSE_COMMAND, strlen(COMPLEX_OPERATOR_CLOSE_COMMAND)) == 0)
         {
             node_list[node_number] = COPMLEX_OPERATOR_CLOSE_();
-            *buffer += strlen("Вознеси хвалу Омниссии");
+            *buffer += strlen(COMPLEX_OPERATOR_CLOSE_COMMAND);
         }
-        else if (strncmp(*buffer, "До тех пор, пока, волею Омниссии", strlen("До тех пор, пока, волею Омниссии")) == 0)
+        else if (strncmp(*buffer, WHILE_COMMAND, strlen(WHILE_COMMAND)) == 0)
         {
             node_list[node_number] = WHILE_();
-            *buffer += strlen("До тех пор, пока, волею Омниссии\n");
+            *buffer += strlen(WHILE_COMMAND);
         }
-        else if (strncmp(*buffer, "Ежели, хвала Омниссиии", strlen("Ежели, хвала Омниссиии")) == 0)
+        else if (strncmp(*buffer, IF_COMMAND, strlen(IF_COMMAND)) == 0)
         {
             node_list[node_number] = IF_();
-            *buffer += strlen("Ежели, хвала Омниссиии");
+            *buffer += strlen(IF_COMMAND);
         }
-        else if (strncmp(*buffer, "Поблагодари святой когитатор за успешное выполнение", strlen("Поблагодари святой когитатор за успешное выполнение")) == 0)
+        else if (strncmp(*buffer, END_OF_PROGRAMM_COMMAND, strlen(END_OF_PROGRAMM_COMMAND)) == 0)
         {
             node_list[node_number] = END_OF_PROGRAMM_();
-            *buffer += strlen("Поблагодари святой когитатор за успешное выполнение");
+            *buffer += strlen(END_OF_PROGRAMM_COMMAND);
         }
-        else if (strncmp(*buffer, "присвой значение этой частице Омниссии", strlen("присвой значение этой частице Омниссии")) == 0)
+        else if (strncmp(*buffer, ASSIGNMENT_COMMAND, strlen(ASSIGNMENT_COMMAND)) == 0)
         {
             node_list[node_number] = ASSIGNMENT_();
-            *buffer += strlen("присвой значение этой частице Омниссии");
+            *buffer += strlen(ASSIGNMENT_COMMAND);
         }
-        else if (strncmp(*buffer, "сложи сии священные числа", strlen("сложи сии священные числа")) == 0)
+        else if (strncmp(*buffer, ADD_COMMAND, strlen(ADD_COMMAND)) == 0)
         {
             node_list[node_number] = ADD_();
-            *buffer += strlen("сложи сии священные числа");
+            *buffer += strlen(ADD_COMMAND);
         }
-        else if (strncmp(*buffer, "вычти сии священные числа", strlen("вычти сии священные числа")) == 0)
+        else if (strncmp(*buffer, SUB_COMMAND, strlen(SUB_COMMAND)) == 0)
         {
             node_list[node_number] = SUB_();
-            *buffer += strlen("вычти сии священные числа");
+            *buffer += strlen(SUB_COMMAND);
         }
-        else if (strncmp(*buffer, "умножь сии священные числа", strlen("умножь сии священные числа")) == 0)
+        else if (strncmp(*buffer, MUL_COMMAND, strlen(MUL_COMMAND)) == 0)
         {
             node_list[node_number] = MUL_();
-            *buffer += strlen("умножь сии священные числа");
+            *buffer += strlen(MUL_COMMAND);
         }
-        else if (strncmp(*buffer, "раздели сии священные числа", strlen("раздели сии священные числа")) == 0)
+        else if (strncmp(*buffer, DIV_COMMAND, strlen(DIV_COMMAND)) == 0)
         {
             node_list[node_number] = DIV_();
-            *buffer += strlen("раздели сии священные числа");
+            *buffer += strlen(DIV_COMMAND);
         }
-        else if (strncmp(*buffer, "Поделись с адептом священным значением выражения", strlen("Поделись с адептом священным значением выражения")) == 0)
+        else if (strncmp(*buffer, PRINT_COMMAND, strlen(PRINT_COMMAND)) == 0)
         {
             node_list[node_number] = PRINT_();
-            *buffer += strlen("Поделись с адептом священным значением выражения");
+            *buffer += strlen(PRINT_COMMAND);
         }
-        else if (strncmp(*buffer, "Потребуй у адепта Бога-Машины значение числа", strlen("Потребуй у адепта Бога-Машины значение числа")) == 0)
+        else if (strncmp(*buffer, INPUT_COMMAND, strlen(INPUT_COMMAND)) == 0)
         {
-            node_list[node_number] = PRINT_();
-            *buffer += strlen("Потребуй у адепта Бога-Машины значение числа");
+            node_list[node_number] = INPUT_();
+            *buffer += strlen(INPUT_COMMAND);
         }
         else if (**buffer == ';')
         {
@@ -196,7 +209,7 @@ node_t** lexic_analiz(char** buffer, tree_t* tree)
             node_list[node_number] = PAR_CLOSE_();
             (*buffer)++;
         }
-        else if (isdigit(**buffer))
+        else if (isdigit(**buffer))//TODO отрицательные числа
         {
             val = 0;
             buffer_at_start = *buffer;
@@ -239,8 +252,9 @@ node_t** lexic_analiz(char** buffer, tree_t* tree)
     }
 
     tree->node_list_len = node_list_len;
-    for (size_t i = 0; i < node_number; i++)
-        printf("node_list[%ld] = %d\n", i, node_list[i]->value.number_value);
+
+    //for (size_t i = 0; i < node_number; i++)
+    //    printf("node_list[%ld] = %d\n", i, node_list[i]->value.number_value);
 
     return node_list;
 }
@@ -662,8 +676,6 @@ node_t* make_new_var(char* str, tree_t* tree)
         return NULL;
 
     tree->number_of_variables++;
-
-    //free(str);
 
     return VAR_(tree->number_of_variables - 1);
 }
