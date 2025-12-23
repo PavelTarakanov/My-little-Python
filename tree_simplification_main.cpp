@@ -9,13 +9,12 @@
 
 static bool check_file_founded(int argc, int number_of_files);
 
-const int NUMBER_OF_FILES = 2;
+const int NUMBER_OF_FILES = 1;
 
 int main(int argc, char* argv[])
 {
     tree_t* tree = NULL;
-    FILE* asm_address = NULL;
-    int label_number = 0;
+    FILE* output_address = NULL;
 
     if (check_file_founded(argc, NUMBER_OF_FILES))
         return FILES_NOT_FOUNDED_ERROR;
@@ -26,24 +25,22 @@ int main(int argc, char* argv[])
     if (tree_input(tree, argv[1]))
         return TREE_READING_ERROR;
 
-    if (check_file_opening(argv[2], &asm_address, "w+"))
+    tree->root = equation_simplification(tree->root, tree);
+
+    if (check_file_opening(argv[1], &output_address, "w+"))
         return FILE_OPENING_ERROR;
 
-    if (node_assemblating(tree->root, tree, asm_address, &label_number))
-        return ASM_MAKING_ERROR;
+    node_output(tree->root, tree, output_address);
 
-    printf("Making asm code is finished\n");
-
-    if (check_file_closing(asm_address))
+    if (check_file_closing(output_address))
         printf("Error while closing file!");
 
-    if (tree_dump(tree))
-        return DUMP_ERROR;
+    tree_dump(tree);
+
+    printf("Tree simplification is finished\nMiddle end success!\n");
 
     tree_destroy(tree);
 
-    printf("Back end success!\n");
-    
     return NO_ERROR;
 }
 

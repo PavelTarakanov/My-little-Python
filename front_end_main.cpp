@@ -30,8 +30,10 @@ int main(int argc, char* argv[])
 
     node_output(tree->root, tree, output_address);
 
+    printf("Front end success!\n");
+
     if (check_file_closing(output_address))
-        printf("Error while closing file!");
+        printf("Error whil1e closing file!");
 
     infix_tree_destroy(tree);
 }

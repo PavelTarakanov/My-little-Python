@@ -39,7 +39,7 @@ struct node_t{tree_elem_t value;
 };
 
 struct variable_t{char* var_name;
-                  double var_value;
+                  int var_value;
 };
 
 struct tree_t{node_t* root;
@@ -74,6 +74,8 @@ void tree_destroy(tree_t* tree);
 node_t* node_init(tree_elem_t value, type_t type, node_t* left, node_t* right);
 void node_destroy(node_t* node);
 void make_parents(node_t* node, node_t* parent);
+
+node_t* equation_simplification(node_t* node, tree_t* tree);
 
 node_t* infix_read(char* file_name, tree_t* tree);
 
