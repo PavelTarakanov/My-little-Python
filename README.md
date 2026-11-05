@@ -1,157 +1,121 @@
-🔧 Священный Когитатор: Язык программирования Омниссия
-«Вознеси хвалу Машине-Богу и исполни код во славу его!»
+# My-little-Python
 
-Добро пожаловать в M40 Programming Language — язык программирования, разработанный для истинных жрецов Адептус Механикус. Забудьте о скучных if-else и while. У нас есть ритуалы вызова, священные числа и хвала Омниссии.
+A modular educational compiler, assembler, and stack-based virtual machine built in C++. This project implements a complete end-to-end translation pipeline—from parsing high-level custom source code into an Abstract Syntax Tree (AST) to generating assembly, bytecode, and executing it on a custom virtual machine.
 
-Этот проект — полноценный компилятор и виртуальная машина, которые позволяют писать код на псевдо-латыни технического жаргона Warhammer 40,000 и исполнять его.
+## 📝 Language Syntax & Features
 
-📜 Краткий обзор
-Проект превращает «священные писания» (исходный код) в машинный байт-код, который затем исполняется процессором (VM). Весь путь от жреца до кремния выглядит так:
+The programming language processed by the **Front-End** module (`infix_read.cpp`) features a distinctive, thematic syntax heavily inspired by the Adeptus Mechanicus (Machine God / Omnissiah motif), combining standard algebraic infix notation with verbose, ritualistic commands.
 
-Frontend (front_end.out) : Читает файл с «Омниссианским диалектом» и превращает его в абстрактное синтаксическое дерево (AST).
+### 1. Variables and Assignment
 
-Middle End (simplification.out) : Оптимизирует дерево (упрощает уравнения).
+Variables do not require explicit type declarations. Assignment uses a dedicated phrase:
 
-Backend (back_end.out) : Обходит дерево и генерирует ассемблерный код (*.asm).
+* **Syntax**: `variable присвой значение этой частице Омниссии expression;`
+* **Example**:
+  ```
+  fac присвой значение этой частице Омниссии 1;
+  ```
 
-Assembler (asm.out) : Транслирует ассемблер в бинарный байт-код.
+### 2. Arithmetic Operations
 
-Processor (processor.out) : Виртуальный процессор, исполняющий байт-код на вашей машине.
+Mathematical expressions support standard infix operators, operator precedence, and parentheses. Crucially, arithmetic operations use explicit descriptive phrases instead of traditional symbols:
 
-✨ Ключевые особенности (Благословение Машины)
-Полный цикл компиляции: Синтаксический анализ -> AST -> Оптимизация -> ASM -> Байт-код.
+* Addition: `сложи сии священные числа` (`+`)
+* Subtraction: `вычти сии священные числа` (`-`)
+* Multiplication: `умножь сии священные числа` (`*`)
+* Division: `раздели сии священные числа` (`/`)
+* **Example**:
+  ```
+  i присвой значение этой частице Омниссии i сложи сии священные числа 1;
+  ```
 
-Эзотерический синтаксис: Абсолютно нефункциональный с прагматичной точки зрения, но очень атмосферный.
+### 3. Control Flow & Blocks
 
-Виртуальный процессор: Собственный стек, 16 регистров (RAX...R15), RAM и система команд.
+* **Conditional Statements (`if`)**:
 
-Графический дамп AST: Визуализация синтаксического дерева в формате PNG.
+  ```
+  Ежели, хвала Омниссиии (condition) operation;
+  ```
+* **Loops (`while`)**:
 
-Оптимизации: Упрощение константных выражений и сворачивание «священной математики».
+  ```
+  До тех пор, пока, волею Омниссии (condition)
+  Именем Омниссии, исполни
+      # body statements
+  Вознеси хвалу Омниссии;
+  ```
+* **Complex Operators (Braces/Scopes)**: Code blocks are opened with `Именем Омниссии, исполни` and closed with `Вознеси хвалу Омниссии;`.
 
-🦾 Технологический стек
-Язык: C++ (с элементами C).
+### 4. Input / Output & Program Termination
 
-Сборка: g++ (скрипт build_language.sh).
+* **Input**: `Потребуй у адепта Бога-Машины значение числа (variable);`
+* **Output (Print)**: `Поделись с адептом священным значением выражения(expression);`
+* **Program End**: Every script must conclude with a final blessing:
+  ```
+  Поблагодари святой когитатор за успешное выполнение
+  ```
 
-Визуализация: Graphviz (dot).
+## 🚀 Execution Pipeline (Step-by-Step)
 
-Память: Ручное управление (malloc/calloc/free).
+To translate and execute a source file written in the Omnissiah language (e.g., `programm.txt`), run the compiled binaries sequentially in the following order:
 
-📖 Священное Писание (Синтаксис)
-Пример программы, вычисляющей факториал:
+### Step 1: Front-End Parser (`front_end.out`)
 
-(Файл: programm.txt)
+Parses the high-level language source file into an Abstract Syntax Tree (AST) stored in an intermediate text representation.
 
-text
-n присвой значение этой частице Омниссии 0;
-fac присвой значение этой частице Омниссии 1;
-i присвой значение этой частице Омниссии 1;
+* **Arguments**: `<source_code_file>`
+* **Command**:
+  ```bash
+  ./front_end.out programm.txt
+  ```
+* **Output**: Generates/updates the intermediate AST tree representation file (e.g., `tree.txt`).
 
-Потребуй у адепта Бога-Машины значение числа (n);
+### Step 2: Middle-End Optimizer (`simplification.out`)
 
-До тех пор, пока, волею Омниссии (n вычти сии священные числа i)
-Именем Омниссии, исполни
-    fac присвой значение этой частице Омниссии fac умножь сии священные числа i;
-    i присвой значение этой частице Омниссии i сложи сии священные числа 1;
-Вознеси хвалу Омниссии;
+Reads the AST file, performs constant folding and equation simplification, and overwrites the file with the optimized AST.
 
-fac присвой значение этой частице Омниссии fac умножь сии священные числа i;
-Поделись с адептом священным значением выражения(fac);
+* **Arguments**: `<ast_tree_file>`
+* **Command**:
+  ```bash
+  ./simplification.out output.txt
+  ```
 
-Поблагодари святой когитатор за успешное выполнение
+### Step 3: Back-End Assembly Generator (`back_end.out`)
 
-Словарь Адепта:
-Действие	Команда на Омниссиане	Аналог в ASM
-Присваивание	присвой значение этой частице Омниссии	POPM [RAX]
-Сложение	сложи сии священные числа	ADD
-Вычитание	вычти сии священные числа	SUB
-Умножение	умножь сии священные числа	MUL
-Деление	раздели сии священные числа	DIV
-Ввод	Потребуй у адепта... значение числа (x)	IN
-Вывод	Поделись с адептом... значением выражения(x)	OUT
-Условие	Ежели, хвала Омниссиии (условие)	JE/JNE
-Цикл	До тех пор, пока, волею Омниссии (условие)	JMP
-Блок кода	Именем Омниссии, исполни ... Вознеси хвалу	{ ... }
-Конец	Поблагодари святой когитатор...	HLT
-⚙️ Сборка и запуск
-Клонируйте репозиторий и перейдите в директорию проекта.
+Traverses the optimized AST and emits low-level assembly code.
 
-Установите Graphviz:
+* **Arguments**: `<ast_tree_file> <output_asm_file>`
+* **Command**:
+  ```bash
+  ./back_end.out output.txt asm.asm
+  ```
+* **Output**: Generates human-readable assembly instructions (`asm.asm`).
 
-bash
-sudo apt install graphviz  # Ubuntu/Debian
-Выполните сборку:
+### Step 4: Assembler (`asm.out`)
 
-bash
-chmod +x build_language.sh
-./build_language.sh
-Скрипт создаст 5 исполняемых файлов:
+Translates the text assembly into raw machine bytecode.
 
-front_end.out
+* **Arguments**: `<asm_file> <output_bytecode_file>`
+* **Command**:
+  ```bash
+  ./asm.out asm.asm bitecode.txt
+  ```
+* **Output**: Generates machine bytecode executable by the VM (`output.txt`).
 
-simplification.out
+### Step 5: Processor / Virtual Machine (`processor.out`)
 
-back_end.out
+Loads and executes the compiled bytecode on the custom stack-based VM.
 
-asm.out
+* **Arguments**: `<bytecode_file>`
+* **Command**:
+  ```bash
+  ./processor.out bite_code.txt
+  ```
 
-processor.out
+## 🌲 AST Visualization (Tree Dump)
 
-🚀 Запуск программы (Ритуал исполнения)
+The compiler supports generating visual representations of the Abstract Syntax Tree to inspect parsing and optimization passes:
 
-Шаг 1: Фронтенд (Написание молитвы)
-Напишите код в programm.txt (как в примере выше).
+![Tree Visual Dump](visual_dump.png)
 
-Шаг 2: Компиляция (Очищение кода)
-bash
-# Чтение исходника, создание и упрощение дерева
 
-./front_end.out programm.txt output_tree.txt
-
-./simplification.out output_tree.txt
-
-./back_end.out output_tree.txt output_programm.asm
-
-После выполнения вы получите visual_dump.png — картинку вашего AST.
-
-Шаг 3: Ассемблирование (Перевод в машинный код)
-
-bash
-
-./asm.out output_programm.asm bite_code.txt
-
-Создается байт-код (bite_code.txt).
-
-Шаг 4: Запуск (Воля Омниссии)
-
-bash
-
-./processor.out bite_code.txt
-
-Процессор исполнит код. Введите число и получите его факториал.
-
-⚙️ Архитектура Виртуальной Машины (processor.cpp)
-
-Процессор поддерживает:
-
-Стек: Для операций и передачи аргументов.
-
-16 регистров (RAX - R15): Адресация оперативной памяти ([RAX]).
-
-RAM: 5K ячеек для данных.
-
-Система команд: Около 20 инструкций (PUSH, POP, ADD, MUL, CALL, RET, условные переходы).
-
-🔬 Оптимизации (Middle End)
-Скрипт equation_simplification.cpp выполняет «священное упрощение» математики:
-
-Свертка констант: 2 + 3 -> 5.
-
-Удаление сложения/вычитания нуля.
-
-Удаление умножения на 1.
-
-Удаление умножения на 0.
-
-Во славу Марса!
