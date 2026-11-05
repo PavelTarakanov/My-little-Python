@@ -16,20 +16,13 @@ long long int read_text(FILE* input_address, char** buffer)
     if(fstat(fileno(input_address), &statistics) == -1)
         return 0;
 
-    //printf("%ld\n", statistics.st_size);
-
-    *buffer = (char*) calloc(statistics.st_size, sizeof(char));
+    *buffer = (char*) calloc(statistics.st_size + 1, sizeof(char));
     if (*buffer == NULL)
         return 0;
 
     number_of_symbols = fread(*buffer, sizeof(char), statistics.st_size, input_address);
+    (*buffer)[number_of_symbols] = '\0'; // Гарантируем нуль-терминатор
 
-    /*
-    for (long long int i = 0; i < number_of_symbols; i++)
-    {
-        putchar((*buffer)[i]);
-    }
-    */
     return number_of_symbols;
 }
 
@@ -83,9 +76,9 @@ bool make_code_massive(char* buffer, int** mashine_code, int** labels, int* star
     bool error = false;
     char* buffer_end = buffer + number_of_symbols*sizeof(char);
 
-    while(buffer < buffer_end)
+    while(buffer < buffer_end && *buffer != '\0')
     {
-        if (sscanf(buffer,"%s", command) != 1)
+        if (sscanf(buffer,"%199s", command) != 1)
             error = 1;
 
         //printf("cmd = '%s'\n", command);
