@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <assert.h>
 #include <unistd.h>
 #include <math.h>
 #include <string.h>
-#include "stack.h"
+#include "../../include/stack.h"
 
 
-Stack_Error_Code stack_init(stack_t* stk, unsigned int capacity)
+Stack_Error_Code stack_init(my_stack* stk, unsigned int capacity)
 {
     assert(stk);
 
@@ -24,12 +23,11 @@ Stack_Error_Code stack_init(stack_t* stk, unsigned int capacity)
 
     stk->data[0] = LEFT_BIRD;
     stk->data[capacity+1] = RIGTH_BIRD;
-    //StackDump(stk);
 
     return NO_ERROR;
 }
 
-Stack_Error_Code stack_push(stack_t* stk, int value)
+Stack_Error_Code stack_push(my_stack* stk, int value)
 {
     assert(stk);
 
@@ -56,7 +54,7 @@ Stack_Error_Code stack_push(stack_t* stk, int value)
     return err;
 }
 
-Stack_Error_Code stack_pop(stack_t* stk, int* address)
+Stack_Error_Code stack_pop(my_stack* stk, int* address)
 {
     assert(stk);
     assert(address);
@@ -85,7 +83,7 @@ Stack_Error_Code stack_pop(stack_t* stk, int* address)
     return err;
 }
 
-Stack_Error_Code stack_verify(stack_t* stk)
+Stack_Error_Code stack_verify(my_stack* stk)
 {
     assert(stk);
 
@@ -107,7 +105,7 @@ Stack_Error_Code stack_verify(stack_t* stk)
     return NO_ERROR;
 }
 
-void stack_dump(stack_t* stk)
+void stack_dump(my_stack* stk)
 {
     assert(stk);
 
@@ -132,7 +130,7 @@ void stack_dump(stack_t* stk)
     return;
 }
 
-Stack_Error_Code stack_upgrade(stack_t* stk)
+Stack_Error_Code stack_upgrade(my_stack* stk)
 {
     assert(stk);
 
@@ -149,7 +147,7 @@ Stack_Error_Code stack_upgrade(stack_t* stk)
     return stack_verify(stk);
 }
 
-Stack_Error_Code stack_degrade(stack_t* stk)
+Stack_Error_Code stack_degrade(my_stack* stk)
 {
     assert(stk);
 

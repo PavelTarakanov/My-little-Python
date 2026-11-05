@@ -2,15 +2,12 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include <ctype.h>
 #include <math.h>
 #include <sys/stat.h>
-#include "file_using.h"
-#include "language.h"
+#include "../../include/language.h"
 
 #define LV node_calculate(node->left, tree)
 #define RV node_calculate(node->right, tree)
-//если функция одного аргумента, то он - левый
 
 static node_t* number_calculate(node_t* node, tree_t* tree);
 static node_t* delete_zeros(node_t** node, tree_t* tree);

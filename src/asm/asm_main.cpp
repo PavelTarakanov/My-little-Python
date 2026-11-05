@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
-#include <ctype.h>
 #include <assert.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include "stack.h"
-#include "asm.h"
+#include "../../include/stack.h"
+#include "../../include/asm.h"
 
 static bool check_file_founded(int argc, int number_of_files);
 

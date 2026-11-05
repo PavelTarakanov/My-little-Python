@@ -1,6 +1,9 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
 
+#include "stack.h"
+#include <stdio.h>
+
 const int RAM_SIZE = 5000;
 const int NUMBER_OF_REGS = 16;
 
@@ -66,8 +69,8 @@ enum Regs_Numbers
     R15 = 15,
 };
 
-struct processor_t{stack_t stk;
-                   stack_t ret_stk;
+struct processor_t{my_stack stk;
+                   my_stack ret_stk;
                    int* programm;
                    int* regs;
                    int instruction_pointer;

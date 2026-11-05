@@ -5,8 +5,8 @@
 #include <ctype.h>
 #include <sys/stat.h>
 #include <math.h>
-#include "file_using.h"
-#include "language.h"
+#include "../../include/file_using.h"
+#include "../../include/language.h"
 
 #define NUM_(value) node_init((tree_elem_t) {.number_value = value}, NUMBER_TYPE, NULL, NULL)
 #define VAR_(number) node_init((tree_elem_t) {.variable_number = number}, VARIABLE_TYPE, NULL, NULL)
@@ -43,7 +43,6 @@ static node_t* get_n(node_t*** node_list);
 static node_t* get_v(node_t*** node_list, tree_t* tree);
 static node_t* make_new_var(char* str, tree_t* tree);
 
-const int START_STR_LEN = 10;
 const char WHILE_COMMAND[] = "До тех пор, пока, волею Омниссии";
 const char COMPLEX_OPERATOR_OPEN_COMMAND[] = "Именем Омниссии, исполни";
 const char COMPLEX_OPERATOR_CLOSE_COMMAND[] = "Вознеси хвалу Омниссии";

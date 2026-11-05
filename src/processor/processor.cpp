@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <assert.h>
 #include <unistd.h>
 #include <math.h>
 #include <string.h>
 #include <time.h>
-#include "stack.h"
-#include "processor.h"
+#include "../../include/stack.h"
+#include "../../include/processor.h"
 
 Stack_Error_Code processor_init(processor_t* processor, const unsigned int capacity)
 {

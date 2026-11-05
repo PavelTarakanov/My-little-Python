@@ -1,6 +1,8 @@
 #ifndef ASM_H
 #define ASM_H
 
+#include <stdio.h>
+
 const int COMMAND_SIZE = 200;
 
 enum Commands

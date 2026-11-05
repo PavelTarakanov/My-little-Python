@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include <ctype.h>
 #include <sys/stat.h>
-#include "language.h"
+#include "../../include/language.h"
 
 tree_errors node_output(node_t* node, tree_t* tree, FILE* output_address)
 {

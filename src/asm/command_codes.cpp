@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
-#include <ctype.h>
 #include <assert.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include "stack.h"
-#include "asm.h"
+#include "../../include/asm.h"
 
 bool do_push_code(char* command,int** mashine_code, int** start_number_of_command,
                   int* number_of_command, char** buffer)

@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include <ctype.h>
 #include <sys/stat.h>
-#include "file_using.h"
-#include "language.h"
+#include "../../include/file_using.h"
+#include "../../include/language.h"
 
 static bool check_file_founded(int argc, int number_of_files);
 
-const int NUMBER_OF_FILES = 1;
+const int NUMBER_OF_FILES = 2;
 
 int main(int argc, char* argv[])
 {
@@ -22,33 +21,28 @@ int main(int argc, char* argv[])
     if (tree_init(&tree))
         return ALLOCATION_ERROR;
 
-    if (tree_input(tree, argv[1]))
-        return TREE_READING_ERROR;
+    tree->root = infix_read(argv[1], tree);
+    tree_dump(tree);
 
-    tree->root = equation_simplification(tree->root, tree);
-
-    if (check_file_opening(argv[1], &output_address, "w+"))
+    if (check_file_opening(argv[2], &output_address, "w+"))
         return FILE_OPENING_ERROR;
 
     node_output(tree->root, tree, output_address);
 
+    printf("Front end success!\n");
+
     if (check_file_closing(output_address))
-        printf("Error while closing file!");
+        printf("Error whil1e closing file!");
 
-    tree_dump(tree);
-
-    printf("Tree simplification is finished\nMiddle end success!\n");
-
-    tree_destroy(tree);
-
-    return NO_ERROR;
+    infix_tree_destroy(tree);
 }
 
 bool check_file_founded(int argc, int number_of_files)
 {
     if (argc < number_of_files)
     {
-        fprintf(stderr, "Files not founded. Please, give programm file with code tree\n");
+        fprintf(stderr, "Files not founded. Please, give programm two files "
+                        "- file with code on Omnissiah's language and file for tree input\n");
         return 1;
     }
 

@@ -4,8 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/stat.h>
-#include "file_using.h"
-#include "language.h"
+#include "../../include/file_using.h"
+#include "../../include/language.h"
 
 #define NUM_(value) node_init((tree_elem_t) {.number_value = value}, NUMBER_TYPE, NULL, NULL)//+
 #define VAR_(number) node_init((tree_elem_t) {.variable_number = number}, VARIABLE_TYPE, NULL, NULL)
@@ -91,7 +91,7 @@ node_t* node_input(char** buffer, tree_t* tree)
         if (isdigit(**buffer) || (**buffer == '-' && isdigit((*buffer)[1])))
         {
             sscanf(*buffer, "%d", &val);
-            sprintf(command, "%d", val);
+            snprintf(command, sizeof(command), "%d", val);
             *buffer += strlen(command);
             new_node = NUM_(val);
         }

@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
-#include <ctype.h>
 #include <assert.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include "stack.h"
-#include "asm.h"
+#include "../../include/asm.h"
 
 long long int read_text(FILE* input_address, char** buffer)
 {
